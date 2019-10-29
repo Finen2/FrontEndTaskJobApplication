@@ -62,29 +62,3 @@ export async function portfolioList() {
     });
     return await portfolioListRequest.json()
 }
-
-
-export async function portfolioDetails(altas) {
-  const token = localStorage.getItem('token')
-  const portfolioDetailsRequest = await fetch('https://beta.stockzoom.com/api/v1/me/portfolios/' + altas, {
-      method: 'GET',
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
-      },
-    });
-    return await portfolioDetailsRequest.json()
-}
-
-
-export async function instrumentDetail(altas) {
-  const token = localStorage.getItem('token')
-  const instrumentDetailRequest = await fetch('https://beta.stockzoom.com/api/v1/instruments/' + altas, {
-      method: 'GET',
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
-      },
-    });
-    return await instrumentDetailRequest.json()
-}

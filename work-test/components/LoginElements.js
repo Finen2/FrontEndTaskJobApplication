@@ -1,5 +1,6 @@
 import React from 'react'
 import Router from 'next/router'
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import {authenticationInital, tokenVerify, refresh} from '../network/Requests.js'
 
 class Login extends React.Component {
@@ -37,12 +38,18 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div>
-        <input type="email" name="email" placeholder="email" value={this.state.email} onChange={e => this.onChange(e)} /><br />
-        <input type="password" name="password" placeholder="password" value={this.state.password}  onChange={e => this.onChange(e)} /><br />
-        <button onClick={() => this.onSubmit()}>Login</button><br />
-        <button onClick={() => this.onSubmitAuto()}>Auto Login</button>
-      </div>
+      <Form inline>
+        <FormGroup className="mb-4 mr-sm-4 mb-sm-2">
+          <Label for="exampleEmail" className="mr-sm-4">Email:</Label>
+          <Input type="email" name="email" id="exampleEmail" placeholder="email" value={this.state.email} onChange={e => this.onChange(e)} />
+        </FormGroup>
+        <FormGroup className="mb-4 mr-sm-4 mb-sm-2">
+          <Label for="examplePassword" className="mr-sm-4">Password:</Label>
+          <Input type="password" name="password" id="examplePassword" placeholder="password" value={this.state.password}  onChange={e => this.onChange(e)} />
+        </FormGroup>
+        <Button color="primary" className="mb-4 mr-sm-4 mb-sm-2" onClick={() => this.onSubmit()}>Login</Button>
+        <Button color="secondary" className="mb-4 mr-sm-4 mb-sm-2" onClick={() => this.onSubmitAuto()}>Auto Login</Button>
+      </Form>
     )
   }
 }
