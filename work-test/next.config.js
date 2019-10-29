@@ -4,3 +4,6 @@ module.exports = withSass({
     includePaths: ["absolute/path/a", "absolute/path/b"]
   }
 })
+
+const withCSS = require('@zeit/next-css')
+module.exports = withCSS({/* my next config */})
