@@ -12,15 +12,16 @@ export async function authenticationInital(email, password) {
       },
     });
     const authRespons = await authRequest.json();
-    return console.log(authRespons.token);
-}
+    return localStorage.setItem('token', authRespons.token)
+  }
 
 
-export async function refresh(token) {
+export async function refresh() {
+  const token = localStorage.getItem('token')
   const refreshRequest = await fetch('https://beta.stockzoom.com/api-token-refresh/', {
       method: 'POST',
       body: JSON.stringify({
-        "token": "string",
+        "token": token,
       }),
       headers: {
         "Content-Type": "application/json",
@@ -28,15 +29,16 @@ export async function refresh(token) {
       },
     });
     const refreshRespons = await refreshRequest.json();
-    return console.log(refreshRespons);
+    return localStorage.setItem('refreshToken', refreshRespons.token)
 }
 
 
-export async function tokenVerify(token) {
+export async function tokenVerify() {
+  const token = localStorage.getItem('token')
   const verifyRequest = await fetch('https://beta.stockzoom.com/api-token-verify/', {
       method: 'POST',
       body: JSON.stringify({
-        "token": "string",
+        "token": token,
       }),
       headers: {
         "Content-Type": "application/json",
@@ -44,47 +46,45 @@ export async function tokenVerify(token) {
       },
     });
     const verifyRespons = await verifyRequest.json();
-    return console.log(verifyRespons);
+    return verifyRespons.token;
 }
 
 // User specific =====================================================================================
 
-const tokenTest = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTc1NDYsInVzZXJuYW1lIjoid2FycmVuLmJ1ZmZldEB3aWxsYW5kc2tpbGwuc2UiLCJleHAiOjE1NzMzMzY5MDcsImVtYWlsIjoid2FycmVuLmJ1ZmZldEB3aWxsYW5kc2tpbGwuc2UiLCJvcmlnX2lhdCI6MTU3MjEyNzMwN30.0IBurK5tGNn5pwVBcCJg6xdL0BDBgElXD2xXC5PnVFw'
-
 export async function portfolioList() {
-  const jwtRespons = await fetch('https://beta.stockzoom.com/api/v1/me/portfolios/', {
-      method: 'GET',
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${tokenTest}`
-      },
-    });
-    const jwtLoginResponse = await jwtRespons.json();
-    return console.log(jwtLoginResponse);
-}
-
-
-export async function portfolioDetails(token, altas) {
-  const jwtRespons = await fetch('https://beta.stockzoom.com/api/v1/me/portfolios/' + altas, {
+  const token = localStorage.getItem('token')
+  const portfolioListRequest = await fetch('https://beta.stockzoom.com/api/v1/me/portfolios/', {
       method: 'GET',
       headers: {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${token}`
       },
     });
-    const jwtLoginResponse = await jwtRespons.json();
-    return console.log(jwtLoginResponse);
+    return await portfolioListRequest.json()
 }
 
 
-export async function instrumentDetail(token, altas) {
-  const jwtRespons = await fetch('https://beta.stockzoom.com/api/v1/instruments/' + altas, {
+export async function portfolioDetails(altas) {
+  const token = localStorage.getItem('token')
+  const portfolioDetailsRequest = await fetch('https://beta.stockzoom.com/api/v1/me/portfolios/' + altas, {
       method: 'GET',
       headers: {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${token}`
       },
     });
-    const jwtLoginResponse = await jwtRespons.json();
-    return console.log(jwtLoginResponse);
+    return await portfolioDetailsRequest.json()
+}
+
+
+export async function instrumentDetail(altas) {
+  const token = localStorage.getItem('token')
+  const instrumentDetailRequest = await fetch('https://beta.stockzoom.com/api/v1/instruments/' + altas, {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
+    });
+    return await instrumentDetailRequest.json()
 }

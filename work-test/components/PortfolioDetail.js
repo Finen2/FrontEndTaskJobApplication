@@ -1,10 +1,10 @@
 import React from 'react'
 import {portfolioList} from '../network/Requests.js'
 
-const Portfolio = () => (
+const PortfolioDetail = () => (
   <div>
-    
+    Portfolio
   </div>
 )
 
-export default Portfolio
+export default PortfolioDetail
