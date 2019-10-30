@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { timeTransform } from './TimeTransform'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Table, Jumbotron, Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, Col, Row} from 'reactstrap';
 
 const InstrumentDetail = (props) => {
@@ -45,7 +46,7 @@ const InstrumentDetail = (props) => {
                 </tr>
                 <tr>
                   <th scope="row">Created at</th>
-                  <td>{props.info.created_at || '-'}</td>
+                  <td>{timeTransform(props.info.created_at) || '-'}</td>
                 </tr>
                 <tr>
                   <th scope="row">Rating</th>
@@ -94,24 +95,36 @@ const InstrumentDetail = (props) => {
               </thead>
               <tbody>
                 <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
+                  <th scope="row">Price low</th>
+                  <td>{props.info.instrument.price_low || '-'} ({props.info.instrument.currency || '-'})</td>
                 </tr>
                 <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
+                  <th scope="row">Price high</th>
+                  <td>{props.info.instrument.price_high || '-'} ({props.info.instrument.currency || '-'})</td>
                 </tr>
                 <tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
+                  <th scope="row">Price open</th>
+                  <td>{props.info.instrument.price_open || '-'} ({props.info.instrument.currency || '-'})</td>
                 </tr>
-              </tbody>
+                <tr>
+                  <th scope="row">Price close</th>
+                  <td>{props.info.instrument.price_close || '-'} ({props.info.instrument.currency || '-'})</td>
+                </tr>
+                <tr>
+                  <th scope="row">Week 52 high</th>
+                  <td>{props.info.instrument.week_52_high || '-'} ({props.info.instrument.currency || '-'})</td>
+                </tr>
+                <tr>
+                  <th scope="row">Week 52 low</th>
+                  <td>{props.info.instrument.week_52_low || '-'} ({props.info.instrument.currency || '-'})</td>
+              </tr>
+            </tbody>
             </Table>
             <Table striped bordered>
               <thead>
                 <tr>
                   <th>Time</th>
-                  <th>Value</th>
+                  <th>Money</th>
                 </tr>
               </thead>
               <tbody>

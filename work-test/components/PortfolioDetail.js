@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import InstrumentDetail from './InstrumentDetail'
+import { timeTransform } from './TimeTransform'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Table } from 'reactstrap';
 
 const PortfolioDetail = (props) => {
@@ -38,47 +39,47 @@ const PortfolioDetail = (props) => {
             <tbody>
               <tr>
                 <th scope="row">Account number</th>
-                <td>{props.info.account_number}</td>
+                <td>{props.info.account_number || '-'}</td>
               </tr>
               <tr>
                 <th scope="row">Provider</th>
-                <td>{props.info.provider}</td>
+                <td>{props.info.provider || '-'}</td>
               </tr>
               <tr>
                 <th scope="row">Name</th>
-                <td>{props.info.name}</td>
+                <td>{props.info.name || '-'}</td>
               </tr>
               <tr>
                 <th scope="row">Kind</th>
-                <td>{props.info.kind}</td>
+                <td>{props.info.kind || '-'}</td>
               </tr>
               <tr>
                 <th scope="row">Total value</th>
-                <td>{props.info.total_value}</td>
+                <td>{props.info.total_value || '-'}</td>
               </tr>
               <tr>
                 <th scope="row">Market value</th>
-                <td>{props.info.market_value}</td>
+                <td>{props.info.market_value || '-'}</td>
               </tr>
               <tr>
                 <th scope="row">Cash</th>
-                <td>{props.info.cash}</td>
+                <td>{props.info.cash || '-'}</td>
               </tr>
               <tr>
                 <th scope="row">Currency</th>
-                <td>{props.info.currency}</td>
+                <td>{props.info.currency || '-'}</td>
               </tr>
               <tr>
                 <th scope="row">Change</th>
-                <td>{props.info.change}</td>
+                <td>{props.info.change || '-'}</td>
               </tr>
               <tr>
                 <th scope="row">Visibility</th>
-                <td>{props.info.visibility}</td>
+                <td>{props.info.visibility || '-'}</td>
               </tr>
               <tr>
                 <th scope="row">Created at</th>
-                <td>{props.info.created_at}</td>
+                <td>{timeTransform(props.info.created_at) || '-'}</td>
               </tr>
               <tr>
                 <th scope="row">Positions</th>
@@ -94,7 +95,7 @@ const PortfolioDetail = (props) => {
           </Table>
          </ModalBody>
          <ModalFooter>
-           
+
          </ModalFooter>
        </Modal>
    </div>

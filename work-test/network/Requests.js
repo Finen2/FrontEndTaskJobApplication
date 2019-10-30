@@ -35,10 +35,11 @@ export async function refresh() {
 
 export async function tokenVerify() {
   const token = localStorage.getItem('token')
+  const refreshToken = localStorage.getItem('refreshToken')
   const verifyRequest = await fetch('https://beta.stockzoom.com/api-token-verify/', {
       method: 'POST',
       body: JSON.stringify({
-        "token": token,
+        "token": refreshToken,
       }),
       headers: {
         "Content-Type": "application/json",
@@ -46,6 +47,7 @@ export async function tokenVerify() {
       },
     });
     const verifyRespons = await verifyRequest.json();
+    localStorage.setItem('token', verifyRespons.token)
     return verifyRespons.token;
 }
 

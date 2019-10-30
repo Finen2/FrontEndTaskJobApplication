@@ -25,17 +25,6 @@ class Login extends React.Component {
     }
   }
 
-  //To be erased futher on
-  onSubmitAuto = async () => {
-    await authenticationInital("warren.buffet@willandskill.se", "berkshirehathaway2018")
-    await refresh()
-    if (await tokenVerify() === undefined) {
-     return alert('this is not a valid user')
-    }else{
-      Router.push('/Profile')
-    }
-  }
-
   render() {
     return (
       <Form inline>
@@ -48,7 +37,6 @@ class Login extends React.Component {
           <Input type="password" name="password" id="examplePassword" placeholder="password" value={this.state.password}  onChange={e => this.onChange(e)} />
         </FormGroup>
         <Button color="primary" className="mb-4 mr-sm-4 mb-sm-2" onClick={() => this.onSubmit()}>Login</Button>
-        <Button color="secondary" className="mb-4 mr-sm-4 mb-sm-2" onClick={() => this.onSubmitAuto()}>Auto Login</Button>
       </Form>
     )
   }

@@ -3,15 +3,22 @@ import InstrumentDetail from '../components/InstrumentDetail'
 import PortfolioDetail from '../components/PortfolioDetail'
 import 'bootstrap/dist/css/bootstrap.css';
 import Router from 'next/router'
-import { Button, Table, Jumbotron } from 'reactstrap';
+import { Button, Table, Jumbotron, Spinner } from 'reactstrap';
 import {portfolioList} from '../network/Requests.js'
+import { timeTransform } from '../components/TimeTransform'
+import { tokenVerify } from '../network/Requests.js'
 
 
 class Profile extends React.Component {
 
   async componentDidMount() {
-    const self = this;
-    self.setState(await portfolioList())
+    if (await tokenVerify() === undefined) {
+      localStorage.clear()
+      Router.push('/index')
+    }else{
+      const self = this;
+      self.setState(await portfolioList())
+    }
   }
 
   logout(){
@@ -23,9 +30,8 @@ class Profile extends React.Component {
     if (this.state != null) {
       return (
         <div>
-          <Button color="primary" onClick={() => this.logout()}>Logout</Button>
+          <Button color="primary" onClick={() => this.logout()} style={{margin: "1em"}}>Logout</Button>
           <Jumbotron>
-
             <Table>
               <thead>
                 <tr>
@@ -58,7 +64,7 @@ class Profile extends React.Component {
                     <td>{item.currency || '-'}</td>
                     <td>{item.change || '-'}</td>
                     <td>{item.visibility || '-'}</td>
-                    <td>{item.created_at || '-'}</td>
+                    <td>{timeTransform(item.created_at) || '-'}</td>
                     <td>
                     {item.positions
                     ? item.positions.map(position =>
@@ -75,7 +81,10 @@ class Profile extends React.Component {
       )
     }else{
       return(
-        <div> Loading... </div>
+        <div style={{margin: "1em"}}>
+          Loading
+          <Spinner color="primary" style={{marginLeft: "1em"}} />
+        </div>
       )
     }
   }
