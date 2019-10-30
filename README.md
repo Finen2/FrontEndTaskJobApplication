@@ -1,4 +1,3 @@
 # FrontEndTaskJobApplication
 
-Start application
-# yarn start
+Start application ( yarn start )
